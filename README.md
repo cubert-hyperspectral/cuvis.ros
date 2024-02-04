@@ -101,6 +101,8 @@ python3.9 -m pip install .
 
 ### Running the ROS Nodes
 
+In the file `scripts/ros_interface.py` update the shebang to match the installation location of your Python3.9 interpreter.
+
 #### Standalone with Default Args
 
 This step assumes there is already another ROS core instance running elsewhere.
