@@ -1,14 +1,14 @@
 # Cuvis_ROS
 
-### A ROS package for the Cubert family of hyperspectral cameras
+### A ROS2 package for the Cubert family of hyperspectral cameras
 
 ## Installation (Ubuntu)
 
 ## Prequisities
 
-Please install [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu), ths last ROS1 release.
+Please install [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html). ROS2 Foxy will work with Ubuntu 20, other future ROS2 versions are not yet supported.
 
-Support for ROS1 in Windows is considered experimental, with not all packages supported. This driver requires the use of an Ubuntu 20 operating system for tested support.
+Support for ROS2 in Windows is considered experimental, with not all packages supported. This driver requires the use of an Ubuntu 20 operating system for tested support.
 
 By default ROS Noetic will use Python 3.8.10. The current Cuvis library requires Python >= 3.9.1. Install this version using a virtual environment or alternate Python distribution using these [instructions](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/).
 
