@@ -26,6 +26,7 @@ class CameraDriver:
         self.default_dir = os.path.join(self.ros_pack.get_path('cuvis_ros'),'cuvis_factory')
         dataDir = rosparam.get_param('data_dir', self.default_dir)
         factoryDir = rosparam.get_param('factory_dir', self.default_dir)
+        self.timeout = rosparam.get_param('camera_timeout', 2500) # Timeout for acquisition, this value might need to be large
         userSettingsDir = os.path.join(dataDir, "settings")
         self.exposure = rospy.get_param('integration_time', 30) # integration time in ms
         self.rate = rospy.get_param('loop_rate', 1) # Rate at which the publishing loop will run
@@ -55,7 +56,7 @@ class CameraDriver:
         Record raw hyperspectral image
         '''
         am = self.acquisitionContext.capture()
-        mesu, res = am.get(timedelta(milliseconds=2500)) # This value needs to be large for the X50 or it times out
+        mesu, res = am.get(timedelta(milliseconds=self.timeout))
 
         if mesu is not None:
             self.processingContext.apply(mesu)

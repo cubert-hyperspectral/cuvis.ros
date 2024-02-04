@@ -6,7 +6,7 @@
 
 ## Prequisities
 
-Please install ROS Noetic, ths last ROS1 release.
+Please install [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu), ths last ROS1 release.
 
 Support for ROS1 in Windows is considered experimental, with not all packages supported. This driver requires the use of an Ubuntu 20 operating system for tested support.
 
@@ -14,7 +14,13 @@ By default ROS Noetic will use Python 3.8.10. The current Cuvis library requires
 
 N.B., you will need to install both python3.9 and python3.9-dev to build the `cuvis.pyil` library.
 
+
+
 ### Installing CUVIS drivers
+
+This ROS driver assumes the CUVIS C SDK has been installed on the local machine. Follow the instructions [here](https://cloud.cubert-gmbh.de/index.php/s/m1WfR66TjcGl96z) before proceeding.
+
+### Extracting CUVIS Factory Files
 
 Install the latest version of Wine: https://wiki.winehq.org/Ubuntu
 
@@ -80,11 +86,9 @@ cp cuvis_il.py <<PYTHON_LIB_LOCATION>>/lib/python3.9/site-packages/cuvis_il/
 Install the Python bindings
 
 ```
-python3.9 -m pip install .
 git clone git@github.com:cubert-hyperspectral/cuvis.python.git
 cd cuvis.python
 python3.9 -m pip install .
-
 ```
 
 ### Building the ROS Nodes
@@ -109,7 +113,6 @@ This is the file that should be edited to pass non-default arguments
 
 `roslaunch cuvis_ros hyper_driver.launch`
 
-``
 
 ### TODO
 

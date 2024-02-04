@@ -54,3 +54,7 @@ cuvis\.pyil/*
 
 cuvis_factory/*.cu3*
 cuvis_factory/*.daq
+
+cuvis.pyil/
+cuvis.python/
+cuvis.python.examples/
