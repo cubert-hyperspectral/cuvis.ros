@@ -13,7 +13,6 @@ import cuvis
 
 # ROS imports
 import rospy
-import rosparam
 import std_msgs
 import rospkg
 from cuvis_ros.msg import DataCube
@@ -22,11 +21,12 @@ from cuvis_ros.msg import DataCube
 class CameraDriver:
     def __init__(self):
         # Initialize configuration directories
-        self.ros_pack = rospkg()
+        self.ros_pack = rospkg.RosPack()
         self.default_dir = os.path.join(self.ros_pack.get_path('cuvis_ros'),'cuvis_factory')
-        dataDir = rosparam.get_param('data_dir', self.default_dir)
-        factoryDir = rosparam.get_param('factory_dir', self.default_dir)
-        self.timeout = rosparam.get_param('camera_timeout', 2500) # Timeout for acquisition, this value might need to be large
+        print(self.default_dir)
+        dataDir = rospy.get_param('data_dir', self.default_dir)
+        factoryDir = rospy.get_param('factory_dir', self.default_dir)
+        self.timeout = rospy.get_param('camera_timeout', 2500) # Timeout for acquisition, this value might need to be large
         userSettingsDir = os.path.join(dataDir, "settings")
         self.exposure = rospy.get_param('integration_time', 30) # integration time in ms
         self.rate = rospy.get_param('loop_rate', 1) # Rate at which the publishing loop will run
@@ -69,7 +69,7 @@ class CameraDriver:
         msg.height, msg.width, msg.lam = list(raw_img.shape)
         msg.data = raw_img.flatten().astype(np.int16)
         msg.integration_time = int(mesu.integration_time)
-        print(raw_img.shape)
+        rospy.loginfo(f'Got frame! Shape:{raw_img.shape}')
 
         self.hypercube_pub.publish(msg)
         self.r.sleep()
