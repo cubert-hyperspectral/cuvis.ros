@@ -6,6 +6,8 @@
 
 ## Prequisities
 
+Looking for the ROS2 driver, use the (ROS2 branch of this repo)[https://github.com/cubert-hyperspectral/cuvis.ros/tree/ros2].
+
 Please install [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu), ths last ROS1 release.
 
 Support for ROS1 in Windows is considered experimental, with not all packages supported. This driver requires the use of an Ubuntu 20 operating system for tested support.
@@ -73,6 +75,7 @@ Reboot your computer and run `ip link show | grep mtu` to confirm the mtu value 
 ```
 git clone git@github.com:cubert-hyperspectral/cuvis.pyil.git
 cd cuvis.pyil
+git submodule update --init --recursive
 cmake .
 cmake --build . --target cuvis_pyil --config Release # This step may take a considerable amount of time unless you turn off Doxygen generation
 ```
