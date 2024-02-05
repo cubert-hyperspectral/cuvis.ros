@@ -26,6 +26,10 @@ class CameraDriver(Node):
     def __init__(self):
         super().__init__('camera_driver')
         # Initialize configuration directories
+        self.declare_parameter('camera_timeout', rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('integration_time', rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('loop_rate', rclpy.Parameter.Type.INTEGER)
+        self.declare_parameter('data_dir', rclpy.Parameter.Type.STRING)
 
         # Retrieve a parameter with a default value if not set
         self.timeout = self.get_parameter('camera_timeout').get_parameter_value(2500).integer_value
@@ -95,18 +99,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
-
-python3.9 -m pip install -U \
-  argcomplete \
-  flake8-blind-except \
-  flake8-builtins \
-  flake8-class-newline \
-  flake8-comprehensions \
-  flake8-deprecated \
-  flake8-docstrings \
-  flake8-import-order \
-  flake8-quotes \
-  pytest-repeat \
-  pytest-rerunfailures \
-  pytest

@@ -36,6 +36,7 @@ endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/DataCube.msg"
+  DEPENDENCIES builtin_interfaces std_msgs
 )
 
 ament_package()

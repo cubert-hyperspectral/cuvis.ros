@@ -6,12 +6,30 @@
 
 ## Prequisities
 
-Please install [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html). ROS2 Foxy will work with Ubuntu 20, other future ROS2 versions are not yet supported.
 
+> :warning: **Experimental Code**: Make sure you know your way around an Ubuntu operating system before proceeding!
 
-By default ROS Noetic will use Python 3.8.10. The current Cuvis library requires Python >= 3.9.1. Install this version using a virtual environment or alternate Python distribution using these [instructions](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/).
+Please install [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) by building from source. ROS2 Foxy will work with Ubuntu 20, other future ROS2 versions are not yet supported.
+
+By default ROS2 Foxy will use Python 3.8.10. The current Cuvis library requires Python >= 3.9.1. Install this version using a virtual environment or alternate Python distribution using these [instructions](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/).
 
 N.B., you will need to install both python3.9 and python3.9-dev to build the `cuvis.pyil` library.
+
+Follow the standard ROS2 source install directions, but before building the `ros2_foxy` local repo clone, use the following modified instructions
+
+```
+# Create the venv
+cd <<WORKING DIRECTORY>>
+python3.9 -m venv venv_3.9
+. venv_3.9/bin/activate
+
+# Install missing packages
+pip install empy==3.3.4 # There might be others...
+# Run the build process
+cd ros2_foxy
+colcon build --symlink-install --packages-skip-by-dep python_qt_binding # Skips some incompatible GUIs
+. ~/ros2_foxy/install/local_setup.bash # Sources local setup
+```
 
 
 
@@ -91,23 +109,21 @@ cd cuvis.python
 python3.9 -m pip install .
 ```
 
-### Building the ROS Nodes
+### Building the ROS2 Nodes
 
-`cd cuvis.ros && catkin build`
+`cd cuvis.ros && colcon build`
 
-`catkin_build` is prefered over `catkin_make`, but both should work.
-
-`source devel/setup.bash` to add the new packages to the search path.
+`source install/setup.bash` to add the new packages to the search path.
 
 ### Running the ROS Nodes
 
-In the file `scripts/ros_interface.py` update the shebang to match the installation location of your Python3.9 interpreter.
+In the file `scripts/ros2_interface.py` update the shebang to match the installation location of your Python3.9 interpreter.
 
 #### Standalone with Default Args
 
 This step assumes there is already another ROS core instance running elsewhere.
 
-`rosrun cuvis_ros ros_interface.py`
+`ros2 run cuvis_ros ros2_interface.py`
 
 #### With Launch File
 
@@ -124,4 +140,4 @@ This section contains additional development goals which will be pursued as time
 - [ ] Integration with Hyper-Drive common HSI ROS library
 - [ ] Add reflectance/radiance calibration measurement
 - [ ] Handle loop interrupts with grace
-- [ ] ROS2 support
+- [X] ROS2 support
