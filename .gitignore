@@ -58,3 +58,7 @@ cuvis_factory/*.daq
 cuvis.pyil/
 cuvis.python/
 cuvis.python.examples/
+
+build/
+install/
+log/

@@ -8,7 +8,6 @@
 
 Please install [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html). ROS2 Foxy will work with Ubuntu 20, other future ROS2 versions are not yet supported.
 
-Support for ROS2 in Windows is considered experimental, with not all packages supported. This driver requires the use of an Ubuntu 20 operating system for tested support.
 
 By default ROS Noetic will use Python 3.8.10. The current Cuvis library requires Python >= 3.9.1. Install this version using a virtual environment or alternate Python distribution using these [instructions](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/).
 
@@ -73,6 +72,7 @@ Reboot your computer and run `ip link show | grep mtu` to confirm the mtu value 
 ```
 git clone git@github.com:cubert-hyperspectral/cuvis.pyil.git
 cd cuvis.pyil
+git submodule update --init --recursive
 cmake .
 cmake --build . --target cuvis_pyil --config Release # This step may take a considerable amount of time unless you turn off Doxygen generation
 ```
