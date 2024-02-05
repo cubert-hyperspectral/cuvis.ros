@@ -21,7 +21,7 @@ find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(std_msgs REQUIRED) 
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -44,5 +44,10 @@ ament_package()
 
 install(PROGRAMS
  ${CMAKE_CURRENT_SOURCE_DIR}/scripts/ros2_interface.py
+ ${CMAKE_CURRENT_SOURCE_DIR}/scripts/datacube_sub.py
+ ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/init.daq # Make sure this exists
+ ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/SpRad.cu3 # Make sure this exists
+ ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/system.settings # Make sure this exists
+ ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/ultris50.settings # Make sure this exists
  DESTINATION lib/${PROJECT_NAME}
 )

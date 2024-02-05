@@ -9,6 +9,8 @@
 
 > :warning: **Experimental Code**: Make sure you know your way around an Ubuntu operating system before proceeding!
 
+> :warning: **Updates Inbound**: We are planning to migrate the ROS2 code to a containerization strategy to prevent issues with Python versioning in the near future. This repo is experimental code!
+
 Please install [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) by building from source. ROS2 Foxy will work with Ubuntu 20, other future ROS2 versions are not yet supported.
 
 By default ROS2 Foxy will use Python 3.8.10. The current Cuvis library requires Python >= 3.9.1. Install this version using a virtual environment or alternate Python distribution using these [instructions](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/).
@@ -31,8 +33,6 @@ colcon build --symlink-install --packages-skip-by-dep python_qt_binding # Skips 
 . ~/ros2_foxy/install/local_setup.bash # Sources local setup
 ```
 
-
-
 ### Installing CUVIS drivers
 
 This ROS driver assumes the CUVIS C SDK has been installed on the local machine. Follow the instructions [here](https://cloud.cubert-gmbh.de/index.php/s/m1WfR66TjcGl96z) before proceeding.
@@ -48,6 +48,8 @@ Accept license, and click through installer. Select the license file included on
 ### Configure Factory Directories
 
 The `cuvis.ros` repo contains an empty folder named `cuvis_factory`. When prompted, select this folder for the factory installation. This place two files, `init.daq` and `SpRad.cu3` in the folder.
+
+The Wine installation will also generate two `.settings` files specific to your camera installation. They should be placed in the same folder as the `init.daq` and `spRad.cu3`. Make sure to update the names of these files in the install step of `CMakeLists.txt`.
 
 ### Configure Camera Network
 
@@ -113,25 +115,30 @@ python3.9 -m pip install .
 
 `cd cuvis.ros && colcon build`
 
-`source install/setup.bash` to add the new packages to the search path.
+`source install/local_setup.bash` to add the new packages to the search path.
 
 ### Running the ROS Nodes
 
-In the file `scripts/ros2_interface.py` update the shebang to match the installation location of your Python3.9 interpreter.
+In the files `scripts/ros2_interface.py` and `scripts/datacube_sub.py` update the shebang to match the installation location of your Python3.9 interpreter. Code will not run without this variable set!
 
 #### Standalone with Default Args
 
-This step assumes there is already another ROS core instance running elsewhere.
-
+Run the camera driver node:
 `ros2 run cuvis_ros ros2_interface.py`
 
-#### With Launch File
+Run sample subscriber node (optional): `ros2 run cuvis_ros datacube_sub.py`
 
-This is the file that should be edited to pass non-default arguments
+### Helpful hint
 
-`roslaunch cuvis_ros hyper_driver.launch`
+Every new terminal you open needs to have the following commands added to it. If you receive errors about missing commands, this is most likely your issue.
 
-
+```
+cd <<VENV parent directory>>
+. venv_3.9/bin/activate
+. ~/ros2_foxy/install/local_setup.bash 
+cd <<ROS2 Workspace>>
+source install/local_setup.bash
+```
 ### TODO
 
 This section contains additional development goals which will be pursued as time allows.
@@ -141,3 +148,4 @@ This section contains additional development goals which will be pursued as time
 - [ ] Add reflectance/radiance calibration measurement
 - [ ] Handle loop interrupts with grace
 - [X] ROS2 support
+- [ ] ROS2 launch file
