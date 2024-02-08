@@ -1,4 +1,4 @@
-#!/home/cubert/venv_3.9/bin/python3
+#!/install/venv_3.9/bin/python
 
 ### Change the shebang to match the Python distribution
 
