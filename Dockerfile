@@ -83,32 +83,15 @@ RUN . /install/venv_3.9/bin/activate && \
     apt update && apt install -y \
     libbullet-dev \
     python3-pytest-cov \
-    ros-dev-tools && \
-    # install some pip packages needed for testing
-    python3 -m pip install -U \
-    argcomplete \
-    flake8-blind-except \
-    flake8-builtins \
-    flake8-class-newline \
-    flake8-comprehensions \
-    flake8-deprecated \
-    flake8-docstrings \
-    flake8-import-order \
-    flake8-quotes \
-    pytest-repeat \
-    pytest-rerunfailures \
-    pytest && \ 
-    # install Fast-RTPS dependencies
-    apt install --no-install-recommends -y \
-    libasio-dev \
-    libtinyxml2-dev && \
-    # install Cyclone DDS dependencies
-    apt install --no-install-recommends -y \
-    libcunit1-dev
+    ros-dev-tools
+
 
 WORKDIR /catkin_ws/src
 RUN apt-get install python3-catkin-tools -y \
+    && . /install/venv_3.9/bin/activate \
+    && pip install pyyaml rospkg \
     && git clone https://github.com/cubert-hyperspectral/cuvis.ros.git && cd cuvis.ros && git checkout ros_noetic_docker \
     && . /opt/ros/noetic/setup.sh \
-    && cd /catkin_ws && catkin build
+    && deactivate \
+    && cd /catkin_ws && catkin init && catkin build
 WORKDIR /catkin_ws/
