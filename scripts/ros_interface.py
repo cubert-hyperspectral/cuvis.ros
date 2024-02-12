@@ -39,8 +39,7 @@ class CameraDriver:
 
         rospy.loginfo("loading user settings...")
         settings = cuvis.General(userSettingsDir)
-        settings.set_log_level("info")
-        settings.set_log_level("info")
+        settings.set_log_level("debug")
         self.processingContext = cuvis.ProcessingContext(calibration)
         self.acquisitionContext = cuvis.AcquisitionContext(calibration)
         print(self.acquisitionContext.state)
