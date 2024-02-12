@@ -47,7 +47,7 @@ class CameraDriver:
         while self.acquisitionContext.state == cuvis.HardwareState.Offline:
             print(self.acquisitionContext.state)
             print(".", end="")
-            rospy.sleep(0.01)
+            rospy.sleep(0.1)
         self.get_logger().info("Camera is online")
         self.acquisitionContext.operation_mode = cuvis.OperationMode.Software
         self.acquisitionContext.integration_time = self.exposure
