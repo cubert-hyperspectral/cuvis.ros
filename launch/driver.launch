@@ -1,5 +1,3 @@
 <launch>
-      <node pkg="cuvis_ros" name="cuvis_ros" type="ros_interface.py" output="screen">
-        <param name="integration_time" value=30/>
-      </node>
+      <node pkg="cuvis_ros" name="cuvis_ros_driver" type="ros_interface.py" output="screen"/>
 </launch>
