@@ -1,4 +1,4 @@
-FROM ros:noetic
+FROM ros:noetic-ros-base
 
 # Update CMake for Cuvis Installation
 RUN apt-get update \
@@ -111,3 +111,4 @@ RUN apt-get install python3-catkin-tools -y \
     && git clone https://github.com/cubert-hyperspectral/cuvis.ros.git && cd cuvis.ros && git checkout ros_noetic_docker \
     && . /opt/ros/noetic/setup.sh \
     && cd /catkin_ws && catkin build
+WORKDIR /catkin_ws/
