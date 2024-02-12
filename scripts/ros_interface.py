@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/install/venv_3.9/bin/python
 
 ### Change this line to match the Python distribution
 import sys
