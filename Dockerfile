@@ -1,4 +1,4 @@
-FROM ros:noetic-ros-core
+FROM ros:noetic
 
 # Update CMake for Cuvis Installation
 RUN apt-get update \
