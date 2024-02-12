@@ -1,4 +1,4 @@
-#!/usr/bin/python3.9
+#!/usr/bin/env python3.9
 
 ### Change this line to match the Python distribution
 
