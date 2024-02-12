@@ -77,6 +77,7 @@ RUN  git clone https://github.com/cubert-hyperspectral/cuvis.pyil.git \
 RUN . /install/venv_3.9/bin/activate && \
     apt install software-properties-common && \
     add-apt-repository universe && \
+    apt-get install -y iputils-ping && \
     apt update &&  apt install curl -y && \
     curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null && \
