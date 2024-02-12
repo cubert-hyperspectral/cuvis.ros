@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 ### Change this line to match the Python distribution
+import sys
+print(sys.executable)
 
 # Python imports
 import os
