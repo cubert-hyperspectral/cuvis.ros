@@ -47,7 +47,7 @@ class CameraDriver:
             print(self.acquisitionContext.state)
             print(".", end="")
             rospy.sleep(1.0)
-        self.get_logger().info("Camera is online")
+        rospy.loginfo("Camera is online")
         self.acquisitionContext.operation_mode = cuvis.OperationMode.Software
         self.acquisitionContext.integration_time = self.exposure
         # Publisher for the raw hyperspectral image
