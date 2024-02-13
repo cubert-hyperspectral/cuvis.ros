@@ -18,9 +18,6 @@ import ament_index_python
 from rclpy.node import Node
 from cuvis_ros.msg import DataCube
 
-
-
-
 class CameraDriver(Node):
     def __init__(self):
         super().__init__('camera_driver', allow_undeclared_parameters=True)
