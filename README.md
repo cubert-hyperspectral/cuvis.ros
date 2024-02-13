@@ -53,10 +53,8 @@ You will now need to move over your camera configuration files from your host in
 ```
 docker cp <<CUVIS_FACTORY_LOCATION>>. <<DOCKER CONTAINER ID>>:/catkin_ws/src/cuvis.ros/cuvis_factory
 ```
-In the terminal for the docker container, the following commands will start the node to grab images:
+In the terminal for the docker container, the following command will start the node to grab images:
 ```
-source devel/setup.bash
-export CUVIS="Linux"
 roslaunch cuvis_ros driver.launch
 ```
 ## Retrieving Camera Data
