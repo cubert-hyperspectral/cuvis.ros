@@ -1,1 +1,1 @@
-docker build -f Dockerfile -t "cuvis_noetic" .
+docker build -f Dockerfile -t "cuvis_noetic" . --no-cache

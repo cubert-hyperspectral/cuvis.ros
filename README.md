@@ -7,12 +7,13 @@
 ### Prereqs
 
 You need docker working on your system, with a docker group. The following instructions are provided for an Ubuntu 20.04 host, although similar installation is possible in a Windows host.
-
+```
 sudo apt-get install docker.io
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
-docker login```
+docker login
+```
 
 In order to pull Docker images, you will need to register an account with Docker [here](https://hub.docker.com/signup).
 
@@ -24,11 +25,11 @@ Clone this repo onto your computer's ros workspace, and change the branch to the
 
 ```
 mkdir cubert && cd cubert
-git clone git@github.com:RIVeR-Lab/cuvis.ros.git && cd cuvis.ros && git checkout ros_noetic_docker```
+git clone https://github.com/cubert-hyperspectral/cuvis.ros.git
+cd cuvis.ros
+git checkout ros_noetic_docker
 ./setup_scripts/install.sh
 ./setup_scripts/build.sh
-ip link set $ETH_INTERFACE_NAME mtu 9000 # Change the variable for $ETH_INTERFACE_NAME to the port for your ethernet interface
-ip addr | grep mtu
 ```
 
 ### Preparing Network Connections
@@ -59,3 +60,8 @@ export CUVIS="Linux"
 roslaunch cuvis_ros driver.launch
 ```
 ## Retrieving Camera Data
+By default the `driver.launch` file records ALL captured images to a `.bag` file. This will fill up your drive quickly unless, so be careful how long you run it!
+
+Kill the `roslaunch` command in terminal with a ctrl-C command. By default the bags are stored at the root file directory, and following naming structure `cuvis_record_YYYY_MM_DD_MM_HH_SS.bag`. Use `ls` to find the bag file name. `rosbag info <<BAG FILE NAME>>` will show the number of messages in the bag.
+
+In the host computer run `docker cp <<DOCKER CONTAINER ID>>:/<<BAG FILE NAME>> <<HOST_PATH>>` to pull down a local copy of the bag file.

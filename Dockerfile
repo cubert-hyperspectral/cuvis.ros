@@ -94,5 +94,7 @@ RUN apt-get install python3-catkin-tools -y \
     && git clone https://github.com/cubert-hyperspectral/cuvis.ros.git && cd cuvis.ros && git checkout ros_noetic_docker \
     && . /opt/ros/noetic/setup.sh \
     && deactivate \
-    && cd /catkin_ws && catkin init && catkin build
+    && cd /catkin_ws && catkin init && catkin build \
+    && echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc \
+    && echo "export CUVIS="Linux"" >> ~/.bashrc
 WORKDIR /catkin_ws/
