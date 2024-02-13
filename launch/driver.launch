@@ -1,3 +1,6 @@
 <launch>
+      <!-- Integration time in milliseconds -->
+      <param name="integration_time" value="30"/> 
       <node pkg="cuvis_ros" name="cuvis_ros_driver" type="ros_interface.py" output="screen"/>
+      <node pkg="rosbag" type="record" name="record" args="-o /cuvis_record.bag '/cuvis/raw_img'"/>
 </launch>

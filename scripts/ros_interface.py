@@ -39,7 +39,6 @@ class CameraDriver:
 
         rospy.loginfo("loading user settings...")
         settings = cuvis.General(userSettingsDir)
-        settings.set_log_level("debug")
         self.processingContext = cuvis.ProcessingContext(calibration)
         self.acquisitionContext = cuvis.AcquisitionContext(calibration)
         print(self.acquisitionContext.state)
@@ -51,7 +50,7 @@ class CameraDriver:
         self.acquisitionContext.operation_mode = cuvis.OperationMode.Software
         self.acquisitionContext.integration_time = self.exposure
         # Publisher for the raw hyperspectral image
-        self.hypercube_pub = rospy.Publisher('hyperspectral/raw_img', DataCube, queue_size=10)
+        self.hypercube_pub = rospy.Publisher('/cuvis/raw_img', DataCube, queue_size=10)
         
     def record_img(self):
         '''
