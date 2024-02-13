@@ -56,13 +56,15 @@ class CameraDriver(Node):
         self.acquisitionContext = cuvis.AcquisitionContext(calibration)
         init_rate = self.create_rate(1)
         while self.acquisitionContext.state == cuvis.HardwareState.Offline:
+            print(self.acquisitionContext.state)
             print(".", end="")
+            rospy.sleep(1.0)
         self.get_logger().info("Camera is online")
         self.acquisitionContext.operation_mode = cuvis.OperationMode.Software
         self.acquisitionContext.integration_time = self.exposure
         
         # Publisher for the raw hyperspectral image
-        self.hypercube_pub = self.create_publisher(DataCube, 'hyperspectral/raw_img', 10)
+        self.hypercube_pub = self.create_publisher(DataCube, '/cuvis/raw_img', 10)
         
     def record_img(self):
         '''

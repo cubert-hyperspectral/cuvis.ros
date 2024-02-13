@@ -133,8 +133,9 @@ RUN apt-get install python3-catkin-tools -y \
     && pip install pyyaml rospkg \
     && git clone https://github.com/cubert-hyperspectral/cuvis.ros.git && cd cuvis.ros && git checkout ros2_docker \
     && . /ros2_source_install/install/setup.sh \
-    # && cd /colcon_ws && colcon build \
-    # && echo "source /ros2_source_install/install/setup.bash" >> ~/.bashrc \
-    # && echo "source /colcon_ws/install/local_setup.bash" >> ~/.bashrc \
+    && cd /colcon_ws && colcon build \
+    && echo "source /ros2_source_install/install/setup.bash" >> ~/.bashrc \
+    && echo "source /install/venv_3.9/bin/activate" >> ~/.bashrc \
+    && echo "source /colcon_ws/install/local_setup.bash" >> ~/.bashrc \
     && echo "export CUVIS="Linux"" >> ~/.bashrc
 WORKDIR /colcon_ws/

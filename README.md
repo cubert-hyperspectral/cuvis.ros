@@ -49,17 +49,13 @@ Start the container by running the following command.
 ```
 In a separate terminal, run `docker container list` to find the container ID of the running container.
 
-You will now need to move over your camera configuration files from your host into the container. At a minimum this should include an `init.daq` and `SpRad.cu3` file.
+You will now need to move over your camera configuration files from your host into the container. At a minimum this should include an `init.daq` and `SpRad.cu3` file. This repo contain empty versions of these files that must be replaced before running the nodes.
 ```
 docker cp <<CUVIS_FACTORY_LOCATION>>. <<DOCKER CONTAINER ID>>:/colcon_ws/src/cuvis.ros/cuvis_factory
 ```
-In the terminal for the docker container, the following command will start the node to grab images:
+In the terminal for the docker container, the following commands will start the node to grab images:
 ```
-ros2 run cuvis_ros driver.launch
+colcon build
+source install/setup.bash
+ros2 run cuvis_ros ros2_interface.py
 ```
-## Retrieving Camera Data
-By default the `driver.launch` file records ALL captured images to a `.bag` file. This will fill up your drive quickly unless, so be careful how long you run it!
-
-Kill the `roslaunch` command in terminal with a ctrl-C command. By default the bags are stored at the root file directory, and following naming structure `cuvis_record_YYYY_MM_DD_MM_HH_SS.bag`. Use `ls` to find the bag file name. `rosbag info <<BAG FILE NAME>>` will show the number of messages in the bag.
-
-In the host computer run `docker cp <<DOCKER CONTAINER ID>>:/<<BAG FILE NAME>> <<HOST_PATH>>` to pull down a local copy of the bag file.
