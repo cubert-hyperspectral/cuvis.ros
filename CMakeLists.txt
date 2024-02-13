@@ -47,7 +47,5 @@ install(PROGRAMS
  ${CMAKE_CURRENT_SOURCE_DIR}/scripts/datacube_sub.py
  ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/init.daq # Make sure this exists
  ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/SpRad.cu3 # Make sure this exists
- ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/system.settings # Make sure this exists
- ${CMAKE_CURRENT_SOURCE_DIR}/cuvis_factory/ultris50.settings # Make sure this exists
  DESTINATION lib/${PROJECT_NAME}
 )
