@@ -20,7 +20,7 @@ N.B., you will need to install both python3.9 and python3.9-dev to build the `cu
 
 ### Installing CUVIS drivers
 
-This ROS driver assumes the CUVIS C SDK has been installed on the local machine. Follow the instructions [here](https://cloud.cubert-gmbh.de/index.php/s/m1WfR66TjcGl96z) before proceeding.
+This ROS driver assumes the CUVIS C SDK has been installed on the local machine. Follow the instructions [here](https://cloud.cubert-gmbh.de/s/q3YiPZPJe5oXziZ) before proceeding.
 
 ### Extracting CUVIS Factory Files
 
