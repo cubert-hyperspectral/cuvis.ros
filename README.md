@@ -9,33 +9,15 @@
 
 > :warning: **Experimental Code**: Make sure you know your way around an Ubuntu operating system before proceeding!
 
-> :warning: **Updates Inbound**: We are planning to migrate the ROS2 code to a containerization strategy to prevent issues with Python versioning in the near future. This repo is experimental code!
+> :warning: **Updates Inbound**: This repo is experimental code!
 
-Please install [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) by building from source. ROS2 Foxy will work with Ubuntu 20, other future ROS2 versions are not yet supported.
+Please install [ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html) via APT
 
-By default ROS2 Foxy will use Python 3.8.10. The current Cuvis library requires Python >= 3.9.1. Install this version using a virtual environment or alternate Python distribution using these [instructions](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/).
-
-N.B., you will need to install both python3.9 and python3.9-dev to build the `cuvis.pyil` library.
-
-Follow the standard ROS2 source install directions, but before building the `ros2_foxy` local repo clone, use the following modified instructions
-
-```
-# Create the venv
-cd <<WORKING DIRECTORY>>
-python3.9 -m venv venv_3.9
-. venv_3.9/bin/activate
-
-# Install missing packages
-pip install empy==3.3.4 # There might be others...
-# Run the build process
-cd ros2_foxy
-colcon build --symlink-install --packages-skip-by-dep python_qt_binding # Skips some incompatible GUIs
-. ~/ros2_foxy/install/local_setup.bash # Sources local setup
-```
+By default ROS2 Humble will use Python 3.10. The current Cuvis library requires Python >= 3.9.1, so this will work by default.
 
 ### Installing CUVIS drivers
 
-This ROS driver assumes the CUVIS C SDK has been installed on the local machine. Follow the instructions [here](https://cloud.cubert-gmbh.de/index.php/s/m1WfR66TjcGl96z) before proceeding.
+This ROS driver assumes the CUVIS C SDK has been installed on the local machine. Follow the instructions [here](https://cloud.cubert-gmbh.de/s/qpxkyWkycrmBK9m) before proceeding.
 
 ### Extracting CUVIS Factory Files
 
@@ -44,6 +26,8 @@ Install the latest version of Wine: https://wiki.winehq.org/Ubuntu
 Using the included flash drive with your camera. Navigate to the Cubert Utilities Installer, right click and select _Open with Wine Windows Program Loader_.
 
 Accept license, and click through installer. Select the license file included on the USB.
+
+*Alternatively, install the program on a Windows machine and copy the files to the Linux (ROS) system.*
 
 ### Configure Factory Directories
 
@@ -90,25 +74,12 @@ Reboot your computer and run `ip link show | grep mtu` to confirm the mtu value 
 
 ### Install Cuvis SDK
 ```
-git clone git@github.com:cubert-hyperspectral/cuvis.pyil.git
-cd cuvis.pyil
-git submodule update --init --recursive
-cmake .
-cmake --build . --target cuvis_pyil --config Release # This step may take a considerable amount of time unless you turn off Doxygen generation
-```
-Move the built libraries to the set locations
+Download the **deb** files and install from [here](https://cloud.cubert-gmbh.de/s/qpxkyWkycrmBK9m)
 
-```
-python3.9 -m pip install .
-cp _cuvis_pyil.so <<PYTHON_LIB_LOCATION>>/lib/python3.9/site-packages/cuvis_il/
-cp cuvis_il.py <<PYTHON_LIB_LOCATION>>/lib/python3.9/site-packages/cuvis_il/
-```
 Install the Python bindings
 
 ```
-git clone git@github.com:cubert-hyperspectral/cuvis.python.git
-cd cuvis.python
-python3.9 -m pip install .
+python3 -m pip install cuvis
 ```
 
 ### Building the ROS2 Nodes
@@ -119,7 +90,7 @@ python3.9 -m pip install .
 
 ### Running the ROS Nodes
 
-In the files `scripts/ros2_interface.py` and `scripts/datacube_sub.py` update the shebang to match the installation location of your Python3.9 interpreter. Code will not run without this variable set!
+In the files `scripts/ros2_interface.py` and `scripts/datacube_sub.py` update the shebang to match the installation location of your Python3 interpreter. Code will not run without this variable set!
 
 #### Standalone with Default Args
 
@@ -132,10 +103,7 @@ Run sample subscriber node (optional): `ros2 run cuvis_ros datacube_sub.py`
 
 Every new terminal you open needs to have the following commands added to it. If you receive errors about missing commands, this is most likely your issue.
 
-```
-cd <<VENV parent directory>>
-. venv_3.9/bin/activate
-. ~/ros2_foxy/install/local_setup.bash 
+``` 
 cd <<ROS2 Workspace>>
 source install/local_setup.bash
 ```
