@@ -1,4 +1,4 @@
-#!/home/cubert/venv_3.9/bin/python3
+#!/usr/bin/python3
 
 ### Change the shebang to match the Python distribution
 
@@ -50,13 +50,16 @@ class CameraDriver(Node):
         calibration = cuvis.Calibration(factoryDir)
 
         self.get_logger().info("loading user settings...")
-        settings = cuvis.General(userSettingsDir)
-        settings.set_log_level("info")
+        cuvis.init(userSettingsDir)
+        cuvis.set_log_level("info")
         self.processingContext = cuvis.ProcessingContext(calibration)
         self.acquisitionContext = cuvis.AcquisitionContext(calibration)
-        init_rate = self.create_rate(1)
+
+        self.get_logger().info("Waiting for camera to come online")
+        self.init_rate = self.create_rate(1)
         while self.acquisitionContext.state == cuvis.HardwareState.Offline:
-            print(".", end="")
+            print(".", end="", flush=True)
+            time.sleep(1)
         self.get_logger().info("Camera is online")
         self.acquisitionContext.operation_mode = cuvis.OperationMode.Software
         self.acquisitionContext.integration_time = self.exposure
