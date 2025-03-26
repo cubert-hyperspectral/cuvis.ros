@@ -73,7 +73,6 @@ sudo update-rc.d jumbo.sh defaults
 Reboot your computer and run `ip link show | grep mtu` to confirm the mtu value is correctly set to 9000.
 
 ### Install Cuvis SDK
-```
 Download the **deb** files and install from [here](https://cloud.cubert-gmbh.de/s/qpxkyWkycrmBK9m)
 
 Install the Python bindings
