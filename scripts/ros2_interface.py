@@ -55,10 +55,9 @@ class CameraDriver(Node):
         self.processingContext = cuvis.ProcessingContext(calibration)
         self.acquisitionContext = cuvis.AcquisitionContext(calibration)
 
-        self.get_logger().info("Waiting for camera to come online")
         self.init_rate = self.create_rate(1)
         while self.acquisitionContext.state == cuvis.HardwareState.Offline:
-            print(".", end="", flush=True)
+            self.get_logger().info("Waiting for camera to come online")
             time.sleep(1)
         self.get_logger().info("Camera is online")
         self.acquisitionContext.operation_mode = cuvis.OperationMode.Software

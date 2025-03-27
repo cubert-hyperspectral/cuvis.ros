@@ -1,5 +1,0 @@
-<launch>
-      <node pkg="cuvis_ros" name="hyper_driver" type="ros_interface.py" output="screen">
-        <param name="integratoin_time" value=30/>
-      </node>
-</launch>
