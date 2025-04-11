@@ -1,0 +1,11 @@
+<launch>
+  <node
+    name="hyper_driver"
+    pkg="cuvis_ros"
+    exec="ros2_interface.py"
+    output="screen">
+    <env name="CUVIS" value="/opt/cuvis_sdk/"/>
+    <param name="integration_time" value="30"/>
+
+  </node>
+</launch>

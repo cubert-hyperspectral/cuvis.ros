@@ -41,6 +41,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 ament_package()
 
+install(DIRECTORY
+ ${CMAKE_CURRENT_SOURCE_DIR}/launch
+ DESTINATION share/${PROJECT_NAME}
+)
 
 install(PROGRAMS
  ${CMAKE_CURRENT_SOURCE_DIR}/scripts/ros2_interface.py
